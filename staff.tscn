@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://blu1wffvfgo5e"]
+
+[ext_resource type="Texture2D" uid="uid://bld27o1j3h6u0" path="res://art/colored-transparent.png" id="1_0r0sf"]
+[ext_resource type="Script" path="res://staff.gd" id="1_bjkeq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6inxu"]
+atlas = ExtResource("1_0r0sf")
+region = Rect2(544, 68, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8mk5h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6inxu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1vkyn"]
+size = Vector2(5, 20)
+
+[node name="staff" type="Node2D"]
+script = ExtResource("1_bjkeq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-8.27293e-07, -10)
+rotation = -0.785398
+sprite_frames = SubResource("SpriteFrames_8mk5h")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_1vkyn")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://blss1gh62gmeh"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_7m86f"]
+[ext_resource type="Texture2D" uid="uid://bld27o1j3h6u0" path="res://art/colored-transparent.png" id="1_t3cvo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukanf"]
+atlas = ExtResource("1_t3cvo")
+region = Rect2(493, 102, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eaaq3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukanf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_54ll8"]
+radius = 6.0
+height = 14.0
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_7m86f")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_eaaq3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_54ll8")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(-6, -1)
+target_position = Vector2(0, 12)

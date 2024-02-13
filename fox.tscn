@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://ddfnx0qi5m5gn"]
+
+[ext_resource type="Script" path="res://fox.gd" id="1_e2ucl"]
+[ext_resource type="Texture2D" uid="uid://byar2hl44jgl4" path="res://art/2d_animation_player-run.png" id="2_2tli6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7tgiw"]
+height = 22.0
+
+[sub_resource type="Animation" id="Animation_jugj1"]
+resource_name = "walk"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 4, 5, 5]
+}
+
+[sub_resource type="Animation" id="Animation_88lp3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_etttg"]
+_data = {
+"RESET": SubResource("Animation_88lp3"),
+"walk": SubResource("Animation_jugj1")
+}
+
+[node name="fox" type="CharacterBody2D"]
+position = Vector2(173, 50)
+script = ExtResource("1_e2ucl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_2tli6")
+hframes = 6
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_7tgiw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_etttg")
+}
