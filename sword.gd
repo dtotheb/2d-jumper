@@ -12,7 +12,7 @@ func _ready():
 func attack():
 	ActiveAttack = true
 
-func swingSword(delta):
+func swingSword(_delta):
 	if ActiveAttack:
 		rotation = rotation + ( deg_to_rad(15))
 		if rotation >= deg_to_rad(180):
@@ -28,7 +28,7 @@ func _process(delta):
 func _on_area_2d_body_entered(body):
 	if body.get_name() == "Player":
 		_on_Pickup()
-	elif body.get_name() == "Enemy":
+	elif body.get_name().contains("Enemy"):
 		if ActiveAttack:
 			body.takeDamage(Damage)
 		
