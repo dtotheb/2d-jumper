@@ -49,12 +49,10 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
-	if velocity.x > 0:
-		#$AnimatedSprite2D.flip_h = false
+	if direction > 0:
 		scale.x = abs(scale.x)
-	elif velocity.x < 0:
+	elif direction < 0:
 		scale.x = abs(scale.x) * -1
-		#$AnimatedSprite2D.flip_h = true
 
 	$AnimatedSprite2D.play()
 	

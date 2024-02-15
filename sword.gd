@@ -2,6 +2,7 @@ extends Node2D
 
 @export var PickUpAble: bool = false
 @export var Damage: int = 2
+@export var SwingSpeed: float = 1.0
 signal PickUp( weapon )
 var ActiveAttack = false
 
@@ -14,7 +15,7 @@ func attack():
 
 func swingSword(_delta):
 	if ActiveAttack:
-		rotation = rotation + ( deg_to_rad(15))
+		rotation = rotation + ( deg_to_rad(5) * SwingSpeed)
 		if rotation >= deg_to_rad(180):
 			ActiveAttack = false
 			rotation = 0
@@ -34,5 +35,4 @@ func _on_area_2d_body_entered(body):
 		
 func _on_Pickup():
 		if PickUpAble:
-			print("pickup " + str(self))
 			emit_signal("PickUp", self)

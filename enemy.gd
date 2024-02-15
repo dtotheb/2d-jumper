@@ -1,9 +1,10 @@
 extends CharacterBody2D
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-@export var Health : int = 5
+@export var MaxHealth : int = 10
 
 var speed = -500
 var facing_left = true
+var Health = MaxHealth
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,8 +14,8 @@ func _ready():
 
 func takeDamage(damage):
 	Health = Health - damage
+	
 	if Health < 1:
-		print("dead")
 		queue_free()
 		
 func flip():
@@ -33,7 +34,6 @@ func _process(delta):
 		velocity.y += gravity * delta
 		
 	if !$RayCast2D.is_colliding() and is_on_floor():
-		print("flip")
 		flip()
 		
 	velocity.x = speed * delta
